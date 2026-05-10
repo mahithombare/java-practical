@@ -1,0 +1,28 @@
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet("/Validation")
+public class Validation extends GenericServlet {
+    
+    @Override
+    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+        res.setContentType("text/html");
+        PrintWriter pw = res.getWriter();
+        
+        String x = req.getParameter("user");
+        String y = req.getParameter("pwd");
+
+        pw.println("<html><body align='center'>");
+        
+        if (x != null && y != null && x.equals("admin") && y.equals("admin")) {
+            pw.println("<font color='green' size='5'>Welcome to this webpage</font>");
+        } else {
+            pw.println("<font color='red' size='5'>Invalid username or password</font>");
+            pw.println("<br><a href='Login.html'>Try Again</a>");
+        }
+        
+        pw.println("</body></html>");
+        pw.close();
+    }
+}
