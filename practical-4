@@ -1,0 +1,40 @@
+package practical;
+
+import java.sql.*;
+
+public class StudentDB {
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/studprac";
+        String user = "root";
+        String pass = "1234";
+
+        try {
+        	
+        	    Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(url, user, pass);
+            
+            // 1. Insert Data
+            String insertQuery = "INSERT INTO students (name, marks) VALUES (?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(insertQuery);
+            pstmt.setString(1, "Rahul");
+            pstmt.setInt(2, 90);
+            pstmt.executeUpdate();
+            System.out.println("Record Inserted Successfully.");
+
+            // 2. Retrieve Data
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM students");
+
+            System.out.println("ID | Name | Marks");
+            while (rs.next()) {
+                System.out.println(rs.getInt("id") + " | " + 
+                                   rs.getString("name") + " | " + 
+                                   rs.getInt("marks"));
+            }
+
+            conn.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
