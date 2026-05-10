@@ -1,0 +1,53 @@
+package practical;
+
+import java.applet.Applet;
+import java.awt.*;
+import java.awt.event.*;
+
+public class KeyStatusApplet extends Applet implements KeyListener {
+    String msg = "";
+    String status = "";
+
+    public void init() {
+     
+        addKeyListener(this);
+       
+        requestFocus();
+        setBackground(Color.white);
+    }
+
+   
+    public void keyTyped(KeyEvent ke) {
+        msg += ke.getKeyChar();
+        status = "Key Typed: " + ke.getKeyChar();
+        repaint();
+    }
+
+  
+    public void keyPressed(KeyEvent ke) {
+        showStatus("Key Down");
+        int key = ke.getKeyCode();
+        switch(key) {
+            case KeyEvent.VK_UP: status = "Status: KeyUp (Arrow)"; break;
+            case KeyEvent.VK_DOWN: status = "Status: KeyDown (Arrow)"; break;
+            case KeyEvent.VK_LEFT: status = "Status: Key Left"; break;
+            case KeyEvent.VK_RIGHT: status = "Status: Key Right"; break;
+            default: status = "Status: Key Pressed"; break;
+        }
+        repaint();
+    }
+
+
+    public void keyReleased(KeyEvent ke) {
+        showStatus("Key Up");
+        status = "Status: Key Released";
+        repaint();
+    }
+
+   
+    public void paint(Graphics g) {
+        g.setFont(new Font("SansSerif", Font.BOLD, 16));
+        g.drawString(status, 20, 50);
+        g.drawString("Typed Text: " + msg, 20, 100);
+    }
+}
