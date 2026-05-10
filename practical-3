@@ -1,0 +1,70 @@
+package practical;
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class MarkEntryFrame extends Frame implements ActionListener {
+    TextField t1, t2, t3;
+    Button b;
+
+    public MarkEntryFrame() {
+        setTitle("Student Mark Entry");
+        setSize(300, 250);
+        setLayout(new GridLayout(4, 2, 10, 10));
+
+        add(new Label("Subject 1 Marks:"));
+        t1 = new TextField();
+        add(t1);
+
+        add(new Label("Subject 2 Marks:"));
+        t2 = new TextField();
+        add(t2);
+
+        add(new Label("Subject 3 Marks:"));
+        t3 = new TextField();
+        add(t3);
+
+        b = new Button("Calculate Result");
+        add(b);
+        b.addActionListener(this);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) { System.exit(0); }
+        });
+
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent ae) {
+        int m1 = Integer.parseInt(t1.getText());
+        int m2 = Integer.parseInt(t2.getText());
+        int m3 = Integer.parseInt(t3.getText());
+        new ResultFrame(m1, m2, m3);
+    }
+
+    public static void main(String[] args) {
+        new MarkEntryFrame();
+    }
+}
+
+class ResultFrame extends Frame {
+    public ResultFrame(int m1, int m2, int m3) {
+        setTitle("Examination Result");
+        setSize(250, 200);
+        setLayout(new FlowLayout());
+
+        int total = m1 + m2 + m3;
+        double percentage = total / 3.0;
+        String status = (m1 >= 35 && m2 >= 35 && m3 >= 35) ? "PASS" : "FAIL";
+
+        add(new Label("Total Marks: " + total));
+        add(new Label("Percentage: " + String.format("%.2f", percentage) + "%"));
+        add(new Label("Status: " + status));
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) { dispose(); }
+        });
+
+        setVisible(true);
+    }
+}
