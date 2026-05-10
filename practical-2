@@ -1,0 +1,50 @@
+package practical;
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class MouseEventFrame extends Frame implements MouseListener {
+    Label statusLabel;
+
+    public MouseEventFrame() {
+        setTitle("Mouse Event Demo");
+        setSize(500, 400);
+        setLayout(new FlowLayout());
+
+        statusLabel = new Label("Interact with the frame...");
+        statusLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        add(statusLabel);
+
+        addMouseListener(this);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+
+        setVisible(true);
+    }
+
+    public void mouseEntered(MouseEvent e) {
+        this.setVisible(true);
+        this.setBackground(Color.ORANGE);
+        statusLabel.setText("Mouse Entered the Frame");
+    }
+
+    public void mouseExited(MouseEvent e) {
+        this.setBackground(Color.WHITE);
+        statusLabel.setText("Mouse Exited the Frame");
+    }
+
+    public void mouseClicked(MouseEvent e) {
+        statusLabel.setText("Mouse Clicked at: " + e.getX() + ", " + e.getY());
+    }
+
+    public void mousePressed(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}
+
+    public static void main(String[] args) {
+        new MouseEventFrame();
+    }
+}
