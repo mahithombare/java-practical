@@ -1,0 +1,30 @@
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+
+@WebServlet("/CalcServlet")
+public class CalcServlet extends HttpServlet {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        // Getting input values
+        double a = Double.parseDouble(request.getParameter("n1"));
+        double b = Double.parseDouble(request.getParameter("n2"));
+        String op = request.getParameter("opt");
+        double res = 0;
+
+        // Logical operations
+        if (op.equals("add")) res = a + b;
+        else if (op.equals("sub")) res = a - b;
+        else if (op.equals("mul")) res = a * b;
+        else if (op.equals("div")) res = a / b;
+
+        // Output matching your screenshot format
+        out.println("<h1>Result = " + res + "</h1>");
+        out.close();
+    }
+}
