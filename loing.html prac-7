@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Login Page</title>
+</head>
+<body>
+    <form name="loginform" method="post" action="Validation"> 
+        <br/><br/><br/><br/><br/>
+        <table align="center" border="3" bordercolor="blue" cellspacing="0" height="120">
+            <tr>
+                <td align="center"><font color="blue" size="4">LOGIN FORM</font></td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>UserName</td>
+                            <td><input type="text" name="user" required/></td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td><input type="password" name="pwd" required/></td>
+                        </tr>
+                        <tr>
+                            <td align="center"><input type="submit" value="LOGIN"/></td>
+                            <td align="center"><input type="reset" value="RESET"/></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
